@@ -11,6 +11,7 @@ from api.models import db
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+from flask_jwt_extended import JWTManager
 
 #from models import Person
 
@@ -29,6 +30,22 @@ else:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db, compare_type = True)
 db.init_app(app)
+
+# Setup the Flask-JWT-Extended extension
+app.config["JWT_SECRET_KEY"] = "super-secret"  
+
+# Set the JWT access and refresh token location
+app.config['JWT_TOKEN_LOCATION'] = ['headers', 'cookies']
+
+# Set the JWT cookie name
+app.config['JWT_COOKIE_NAME'] = 'access_token_cookie'
+
+# Set the JWT access and refresh token headers
+app.config['JWT_HEADER_NAME'] = 'Authorization'
+app.config['JWT_HEADER_TYPE'] = 'Bearer'
+
+# Initialize the JWTManager
+jwt = JWTManager(app)
 
 # Allow CORS requests to this API
 CORS(app)
