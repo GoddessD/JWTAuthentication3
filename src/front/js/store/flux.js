@@ -4,7 +4,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			api: "https://3001-goddessd-jwtauthenticat-dwkvcpy5fgo.ws-us89b.gitpod.io/",
+			api: process.env.BACKEND_URL,
 			isAuthenticated: false,
 			vehicles: [],
 			planets: [],
@@ -14,6 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// Use getActions to call a function within a fuction
 			//exampleFunction: () => {
 			//getActions().changeColor(0, "green");
+
+			// SIGN UP
 			sign_up: (email, password) => {
 				const store = getStore();
 
@@ -40,6 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("Error during login", error))
 			},
 
+			// SIGN IN 
 			sign_in: (email, password) => {
 				const store = getStore();
 
@@ -67,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log('There  was an error signing in', error));
 			},
 
-
+			// VEHICLES
 			loadData: () => {
 				const store = getStore();
 

@@ -14,7 +14,7 @@ export const Login = () => {
 
 	return (
 		<div>
-			<div className="signup-form">
+			<div className="sign_in-form">
 				<div className="forms">
 					<label>Email Address</label>
 					<input
@@ -37,7 +37,7 @@ export const Login = () => {
 			</div>
 
 			<div>
-				<button onClick={() => actions.sign_up(email, password)} className="btn btn-primary">
+				<button onClick={() => actions.sign_in(email, password)} className="btn btn-primary">
 					Login
 				</button>
 			</div>

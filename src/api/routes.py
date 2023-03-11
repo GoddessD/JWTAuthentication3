@@ -8,7 +8,7 @@ from flask_jwt_extended import create_access_token, JWTManager, jwt_required, ge
 from flask_cors import CORS, cross_origin
 
 api = Blueprint('api', __name__)
-
+# CORS(api)
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -68,7 +68,21 @@ def sign_in():
     print(token)
     return jsonify({
         "message" : "Successfully logged in." ,
-        "token: " : token}), 200
+        "token " : token}), 200
+        
+# create a route to authenticate your users and return JWTs
+# create_access_token() function is used to actually generate the JWT
+# @app.route("/token", methods=["POST"])
+# def create_token():
+#     email = request.json.get("email", None)
+#     password = request.json.get("password", None)
+#     if email != "test" or password != "test":
+#         return jsonify({"msg": "Bad username or password"}), 400
+
+# access_token  = create_access_token(identify=email)
+# return jsonify(access_token=access_token)
+
+
 
 
 @api.route("/private", methods=["GET"])
