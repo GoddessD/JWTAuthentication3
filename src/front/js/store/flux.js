@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			api: process.env.BACKEND_URL,
 			isAuthenticated: false,
+			currentUser: null,
 			vehicles: [],
 			planets: [],
 			characters: []
@@ -69,6 +70,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.log('There  was an error signing in', error));
 			},
+
+			getPrivate: () => {
+				const store = getStore();
+
+				fetch(store.api + "/api/private",
+					{
+						headers: { Authentication: `Bearer ${localStorage.getItem("token")}` }
+					})
+					.then(resp => {
+						if (resp.ok) {
+							return resp.json();
+						}
+					})
+					.then(data => {
+						setStore({ currentUser: data });
+					})
+					.catch(error => console.log('There  was an error signing in', error));
+
+
+			},
+
 
 			// VEHICLES
 			loadData: () => {

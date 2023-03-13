@@ -19,6 +19,8 @@ export const Home = () => {
 				<Link to={'/login'}>
 					<button>Log In</button>
 				</Link>
+				<Link to={'/private}'}>
+				</Link>
 			</div></>
 
 	);
