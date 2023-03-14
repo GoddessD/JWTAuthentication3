@@ -1,16 +1,25 @@
 import React, { useContext } from 'react'
 import { Context } from '../store/appContext'
 
+
 // Private component that can only be accessed by authenticated users
 export function Private() {
 
     const { store, actions } = useContext(Context)
+    console.log(store.characters, "These are the Characters.")
     return (
         <div>
-            <h1>Welcome to the private page!</h1>
+            <h1 className="Private bold">Welcome to the Private Page!</h1>
             <p>{store.currentUser ? store.currentUser : "user is not loaded yet"}</p>
-
-            <button onClick={() => actions.getPrivate()}> Get current user </button>
+            <img src="https://loremflickr.com/320/240/starwars/all"></img>
+            <p><italic> Welcome, private members, to the Star Wars universe!
+                Here, you can create your own favorite group of characters, vehicles,
+                and planets for epic quests against other members.
+                Whether you're a Jedi Knight or a Sith Lord, a smuggler or a bounty hunter,
+                the galaxy is yours to explore and conquer. Build your own team of rebels,
+                command your own fleet of starships, and discover new worlds in your quest for dominance.
+                May the Force be with you!</italic></p>
+            {/* <button onClick={() => actions.getPrivate()}> Get current user </button> */}
         </div>
     );
 }

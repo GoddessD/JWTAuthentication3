@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-
+	const navigate = useNavigate()
 	//create a "check" so if they have a login, they will go to Dashboard page
 
 
@@ -37,7 +37,14 @@ export const Login = () => {
 			</div>
 
 			<div>
-				<button onClick={() => actions.sign_in(email, password)} className="btn btn-primary">
+				<button onClick={() => {
+					if (email === "" && password === "") {
+						alert("Please enter your email and password")
+					} else {
+						actions.sign_in(email, password)
+						navigate("/private")
+					}
+				}} className="btn btn-primary">
 					Login
 				</button>
 			</div>

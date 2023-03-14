@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			api: process.env.BACKEND_URL,
 			isAuthenticated: false,
-			currentUser: null,
+			currentUser: [],
 			vehicles: [],
 			planets: [],
 			characters: []

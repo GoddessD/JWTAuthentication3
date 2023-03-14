@@ -9,7 +9,7 @@ import { Login } from "./pages/login";
 import { Private } from "./pages/private";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Dashboard } from "./pages/dashboard";
+import { Characters } from "./pages/characters";
 
 //create your first component
 const Layout = () => {
@@ -27,6 +27,7 @@ const Layout = () => {
                         <Route exact path="/signup" element={<Signup />} />
                         <Route exact path="/login" element={<Login />} />
                         <Route exact path="/private" element={<Private />} />
+                        {/* <Route exact path="/characters" element={<Characters />} /> */}
                     </Routes>
                     <Footer />
                 </ScrollToTop>
