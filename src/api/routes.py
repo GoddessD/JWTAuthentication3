@@ -20,33 +20,31 @@ def handle_hello():
     return jsonify(response_body), 200
 
 @api.route("/signup", methods=["POST"])
-@cross_origin()
 def signup():
-    if request.method == 'POST':
-        email = request.json.get('email', None)
-        password = request.json.get('password', None)
-        if not email:
-            return 'Email is required', 401
-        if not password:
-            return 'Password is required', 401
-        
-        email_query = User.query.filter_by(email=email).first()
-        if email_query:
-            return 'This email already exists' , 402
+    email = request.json.get('email', None)
+    password = request.json.get('password', None)
+    if not email:
+        return 'Email is required', 401
+    if not password:
+        return 'Password is required', 401
+    
+    email_query = User.query.filter_by(email=email).first()
+    if email_query:
+        return 'This email already exists' , 409
 
-        user = User()
-        user.email = email
-        user.password = password
-        user.is_active = True
-        print(user)
-        db.session.add(user)
-        db.session.commit()
+    user = User()
+    user.email = email
+    user.password = password
+    user.is_active = True
+    print(user)
+    db.session.add(user)
+    db.session.commit()
 
-        response = {
-            'message': 'User added successfully',
-            'email': email
-        }
-        return jsonify(response), 200
+    response = {
+        'message': 'User added successfully',
+        'email': email
+    }
+    return jsonify(response), 200
 
 @api.route('/login', methods=['POST'])
 @cross_origin()

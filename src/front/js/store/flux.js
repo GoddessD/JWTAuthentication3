@@ -27,19 +27,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: password
 					}),
 					headers: {
-						"Content-type": "application/json",
-						'Access-Control-Allow-Origin': '*'
+						"Content-type": "application/json"
 					}
 				})
-					.then(resp => {
-						if (resp.ok) {
-							return resp.json();
-						}
-					})
-					.then(data => {
-						localStorage.setItem("token", data.token);
-						setStore({ isAuthenticated: true });
-					})
+					.then(resp => resp.json())
+					.then(data => { return true })
 					.catch(error => console.log("Error during login", error))
 			},
 

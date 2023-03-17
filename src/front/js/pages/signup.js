@@ -1,14 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const navigate = useNavigate()
 
 	//create State for email and password
 
+	const signup = async () => {
+		actions.sign_up(email, password)
+
+		navigate("/login")
+
+	}
 	return (
 		<div>
 			<div className="signup-form">
@@ -35,7 +42,7 @@ export const Signup = () => {
 
 			{/* // #button to send data to endpoint */}
 			<div>
-				<button onClick={() => actions.sign_up(email, password)} className="btn btn-primary">
+				<button onClick={() => signup()} className="btn btn-primary">
 					Submit
 				</button>
 			</div>
