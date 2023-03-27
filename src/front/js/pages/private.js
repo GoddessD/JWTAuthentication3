@@ -1,14 +1,28 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Context } from '../store/appContext'
+import { useNavigate } from 'react-router-dom'
 
 
 // Private component that can only be accessed by authenticated users
 export function Private() {
+    const navigate = useNavigate();
+    const logOut = () => {
+        actions.logOut()
+    };
+
+
+    useEffect(() => {
+
+        if (!localStorage.getItem("token")) {
+            navigate("/login")
+        }
+
+    }, [localStorage.getItem("token")]);
 
     const { store, actions } = useContext(Context)
     console.log(store.characters, "These are the Characters.")
     return (
-        <div>
+        <><div>
             <h1 className="Private bold">Welcome to the Private Page!</h1>
             <p>{store.currentUser ? store.currentUser : "user is not loaded yet"}</p>
             <img src="https://loremflickr.com/320/240/starwars/all"></img>
@@ -20,7 +34,11 @@ export function Private() {
                 command your own fleet of starships, and discover new worlds in your quest for dominance.
                 May the Force be with you!</italic></p>
             {/* <button onClick={() => actions.getPrivate()}> Get current user </button> */}
-        </div>
+        </div><div>
+                <button onClick={() => logOut()} className="btn btn-primary">
+                    Logout
+                </button>
+            </div></>
     );
 }
 

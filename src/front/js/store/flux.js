@@ -57,6 +57,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					.then(data => {
+						console.log(data.token)
 						localStorage.setItem('token', data.token);
 						setStore({ isAuthenticated: true });
 					})
@@ -83,6 +84,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
+			// Logout and reroute to login page
+			logOut: () => {
+				localStorage.removeItem('token');
+				setStore({ isAuthenticated: false });
+			},
+
+			// 
 
 			// VEHICLES
 			loadData: () => {

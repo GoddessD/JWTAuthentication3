@@ -47,7 +47,7 @@ def signup():
     return jsonify(response), 200
 
 @api.route('/login', methods=['POST'])
-@cross_origin()
+# @cross_origin()
 
 def sign_in():
   
@@ -62,11 +62,11 @@ def sign_in():
     user = User.query.filter_by(email = email, password = password).first()
     if user is None:
         return 'error: This user was not found' , 401
-    token = create_access_token(identity = user.id)
-    print(token)
+    token = create_access_token(identity = email)
+    
     return jsonify({
         "message" : "Successfully logged in." ,
-        "token " : token}), 200
+        "token" : token}), 200
         
 # create a route to authenticate your users and return JWTs
 # create_access_token() function is used to actually generate the JWT
